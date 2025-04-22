@@ -114,6 +114,15 @@ int getHeightOfTree(BinaryTreeNode *root)
     return max(leftHeight, rightHeight) + 1;
 }
 
+int getNumOfNodesInTree(BinaryTreeNode* root){
+    if (root ==NULL) return 0;
+
+    int numOfLeftNodes = getNumOfNodesInTree(root->left);
+    int numOfRightNodes = getNumOfNodesInTree(root->right);
+
+    return (numOfLeftNodes+numOfRightNodes)+1;
+}
+
 int main()
 {
     // Your code here
@@ -129,5 +138,6 @@ int main()
     // levelOrderTreeTraversal(root);
 
     cout << "the height of the tree is :" << getHeightOfTree(root) << endl;
+    cout<<"the number of nodes in the tree is :" << getNumOfNodesInTree(root)<<endl;
     return 0;
 }
