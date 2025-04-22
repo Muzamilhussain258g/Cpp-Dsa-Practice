@@ -82,11 +82,14 @@ void levelOrderTreeTraversal(BinaryTreeNode *root)
         q.pop();
         if (curr == NULL)
         {
-            if(!q.empty()){
+            if (!q.empty())
+            {
                 cout << endl;
                 q.push(NULL);
                 continue;
-            }else{
+            }
+            else
+            {
                 break;
             }
         };
@@ -99,6 +102,18 @@ void levelOrderTreeTraversal(BinaryTreeNode *root)
             q.push(curr->right);
     }
 }
+
+int getHeightOfTree(BinaryTreeNode *root)
+{
+    if (root == NULL)
+        return 0;
+
+    int leftHeight = getHeightOfTree(root->left);
+    int rightHeight = getHeightOfTree(root->right);
+
+    return max(leftHeight, rightHeight) + 1;
+}
+
 int main()
 {
     // Your code here
@@ -111,6 +126,8 @@ int main()
     // cout << "\n";
     // postOrderTreeTraversal(root);
     // cout << "\n";
-    levelOrderTreeTraversal(root);
+    // levelOrderTreeTraversal(root);
+
+    cout << "the height of the tree is :" << getHeightOfTree(root) << endl;
     return 0;
 }
