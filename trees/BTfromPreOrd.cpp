@@ -2,6 +2,7 @@
 // preorder tree traversal // Done
 // inorder tree traversal // Done
 // postorder tree traversal // Done
+// level order tree traversal // Done
 
 #include <iostream>
 #include <vector>
@@ -73,18 +74,29 @@ void levelOrderTreeTraversal(BinaryTreeNode *root)
     queue<BinaryTreeNode *> q;
 
     q.push(root);
+    q.push(NULL);
 
     while (!q.empty())
     {
-        BinaryTreeNode *temp = q.front();
-
-        cout << temp->data << " ";
+        BinaryTreeNode *curr = q.front();
         q.pop();
+        if (curr == NULL)
+        {
+            if(!q.empty()){
+                cout << endl;
+                q.push(NULL);
+                continue;
+            }else{
+                break;
+            }
+        };
 
-        if (temp->left != NULL)
-            q.push(temp->left);
-        if (temp->right != NULL)
-            q.push(temp->right);
+        cout << curr->data << " ";
+
+        if (curr->left != NULL)
+            q.push(curr->left);
+        if (curr->right != NULL)
+            q.push(curr->right);
     }
 }
 int main()
@@ -93,12 +105,12 @@ int main()
     vector<int> preOrder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
 
     BinaryTreeNode *root = makeTree(preOrder);
-    preOrderTreeTraversal(root);
-    cout << "\n";
-    inOrderTreeTraversal(root);
-    cout << "\n";
-    postOrderTreeTraversal(root);
-    cout << "\n";
+    // preOrderTreeTraversal(root);
+    // cout << "\n";
+    // inOrderTreeTraversal(root);
+    // cout << "\n";
+    // postOrderTreeTraversal(root);
+    // cout << "\n";
     levelOrderTreeTraversal(root);
     return 0;
 }
