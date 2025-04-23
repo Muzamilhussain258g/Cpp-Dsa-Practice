@@ -108,6 +108,19 @@ void levelOrderTreeTraversal(BinaryTreeNode *root)
     }
 }
 
+bool isThisNumExist(int num, BinaryTreeNode *root)
+{
+    if (root == NULL)
+        return false;
+
+    if (root->data == num)
+        return true;
+    bool findInLeft = isThisNumExist(num, root->left);
+    if (findInLeft)
+        return true;
+    return isThisNumExist(num, root->right);
+}
+
 int getHeightOfTree(BinaryTreeNode *root)
 {
     if (root == NULL)
@@ -141,24 +154,26 @@ int getSumOfNodes(BinaryTreeNode *root)
 
 int getMaximumFromTree(BinaryTreeNode *root)
 {
-    if (root == NULL){
-    // INT_MIN is a constant from <climits> in C++, and it represents the smallest possible integer in your system (usually -2,147,483,648).
+    if (root == NULL)
+    {
+        // INT_MIN is a constant from <climits> in C++, and it represents the smallest possible integer in your system (usually -2,147,483,648).
         return INT_MIN;
     }
 
-
     int leftMaximum = getMaximumFromTree(root->left);
     int rightMaximum = getMaximumFromTree(root->right);
-    
-    return max(max(leftMaximum,rightMaximum),root->data);
+
+    return max(max(leftMaximum, rightMaximum), root->data);
 }
 
-int getMinimumFromTree(BinaryTreeNode* root){
-    if(root ==NULL) return INT_MAX;
+int getMinimumFromTree(BinaryTreeNode *root)
+{
+    if (root == NULL)
+        return INT_MAX;
     int leftMinimum = getMinimumFromTree(root->left);
     int rightMinimum = getMinimumFromTree(root->right);
 
-    return min(min(leftMinimum,rightMinimum),root->data);
+    return min(min(leftMinimum, rightMinimum), root->data);
 }
 
 int main()
