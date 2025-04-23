@@ -3,6 +3,10 @@
 // inorder tree traversal // Done
 // postorder tree traversal // Done
 // level order tree traversal // Done
+// height of tree // Done
+// Number of nodes in tree // Done
+// Sum of nodes in tree // Done
+// Find max and min in the tree // Done
 
 #include <iostream>
 #include <vector>
@@ -114,13 +118,24 @@ int getHeightOfTree(BinaryTreeNode *root)
     return max(leftHeight, rightHeight) + 1;
 }
 
-int getNumOfNodesInTree(BinaryTreeNode* root){
-    if (root ==NULL) return 0;
+int getNumOfNodesInTree(BinaryTreeNode *root)
+{
+    if (root == NULL)
+        return 0;
 
     int numOfLeftNodes = getNumOfNodesInTree(root->left);
     int numOfRightNodes = getNumOfNodesInTree(root->right);
 
-    return (numOfLeftNodes+numOfRightNodes)+1;
+    return (numOfLeftNodes + numOfRightNodes) + 1;
+}
+
+int getSumOfNodes(BinaryTreeNode *root)
+{
+    if (root == NULL)
+        return 0;
+    int leftSum = getSumOfNodes(root->left);
+    int rightSum = getSumOfNodes(root->right);
+    return leftSum + rightSum + root->data;
 }
 
 int main()
@@ -138,6 +153,6 @@ int main()
     // levelOrderTreeTraversal(root);
 
     cout << "the height of the tree is :" << getHeightOfTree(root) << endl;
-    cout<<"the number of nodes in the tree is :" << getNumOfNodesInTree(root)<<endl;
+    cout << "the number of nodes in the tree is :" << getNumOfNodesInTree(root) << endl;
     return 0;
 }
