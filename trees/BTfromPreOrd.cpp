@@ -9,6 +9,7 @@
 // Find max and min in the tree // Done
 
 #include <iostream>
+#include <climits>
 #include <vector>
 #include <queue>
 using namespace std;
@@ -136,6 +137,28 @@ int getSumOfNodes(BinaryTreeNode *root)
     int leftSum = getSumOfNodes(root->left);
     int rightSum = getSumOfNodes(root->right);
     return leftSum + rightSum + root->data;
+}
+
+int getMaximumFromTree(BinaryTreeNode *root)
+{
+    if (root == NULL){
+    // INT_MIN is a constant from <climits> in C++, and it represents the smallest possible integer in your system (usually -2,147,483,648).
+        return INT_MIN;
+    }
+
+
+    int leftMaximum = getMaximumFromTree(root->left);
+    int rightMaximum = getMaximumFromTree(root->right);
+    
+    return max(max(leftMaximum,rightMaximum),root->data);
+}
+
+int getMinimumFromTree(BinaryTreeNode* root){
+    if(root ==NULL) return INT_MAX;
+    int leftMinimum = getMinimumFromTree(root->left);
+    int rightMinimum = getMinimumFromTree(root->right);
+
+    return min(min(leftMinimum,rightMinimum),root->data);
 }
 
 int main()
