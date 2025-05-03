@@ -9,12 +9,19 @@ void bubbleSort(vector<int> &v)
 
     for (int i = 0; i < n - 1; i++)
     {
+        bool isSwap = false; // agr is swap inner waly loop mein true nhi hua to array sorted hy koi swapping nhi hui 
+
         for (int j = 0; j < n - i - 1; j++)
         {
             if (v[j] > v[j + 1])
             {
                 swap(v[j], v[j + 1]);
+                isSwap = true;
             }
+        }
+
+        if(!isSwap){
+            return;
         }
     }
 }
